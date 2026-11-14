@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -55,13 +55,13 @@
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 15px; width: 100%; }
-        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; font-size: 15px; width: 100%; height: 100%; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
         a { text-decoration: none; color: inherit; }
         button, input, select { font-family: inherit; outline: none; }
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
 
-        .page-section { position: relative; width: 100%; padding: 4rem 0; display: flex; align-items: center; justify-content: center; scroll-margin-top: 90px; }
+        .page-section { position: relative; width: 100%; flex: 1; padding: 3rem 0; display: flex; flex-direction: column; justify-content: flex-start; scroll-margin-top: 90px; }
 
         .text-primary { color: var(--primary); }
         .text-accent { color: var(--accent); }
@@ -142,7 +142,7 @@
         .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); background-color: #fff; }
 
         /* FOOTER */
-        .footer-section { background: #ffffff; border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem; }
+        .footer-section { background: #ffffff; border-top: 1px solid var(--border-subtle); padding: 2.5rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: auto; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -178,8 +178,8 @@
         </div>
     </header>
 
-    <!-- KATALOG EVENT (Diberi padding-top lebih lega agar tidak terlalu menempel ke navbar) -->
-    <section id="katalog" class="page-section" style="padding-top: 130px;">
+    <!-- KATALOG EVENT -->
+    <section id="katalog" class="page-section" style="padding-top: 110px;">
         <div class="container">
             <div class="event-controls">
                 <div class="control-group">
