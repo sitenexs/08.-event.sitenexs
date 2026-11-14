@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitenexs Events — Platform Webinar, Workshop & Pameran UMKM</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Temukan dan ikuti berbagai event, webinar, workshop, dan pameran bisnis digital bersama komunitas Sitenexs.">
+    <meta name="keywords" content="Sitenexs Events, Webinar UMKM, Workshop Digital, Event Bisnis Indonesia">
+    <meta name="author" content="SiteNexs">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://event.sitenexs.com/">
+
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://event.sitenexs.com/">
+    <meta property="og:title" content="Sitenexs Events — Platform Acara & Webinar UMKM">
+    <meta property="og:description" content="Ikuti webinar, workshop interaktif, dan pameran eksklusif untuk akselerasi bisnis Anda.">
+    <meta property="og:image" content="https://sitenexs.com/assets/logo/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://sitenexs.com/assets/logo/logo.png">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-subtle: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --border-accent: #93c5fd;
+            --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.07);
+            --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.25rem;
+            --radius-full: 9999px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 15px; width: 100%; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        button, input, select { font-family: inherit; outline: none; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+
+        .page-section { position: relative; width: 100%; padding: 4rem 0; display: flex; align-items: center; justify-content: center; scroll-margin-top: 90px; }
+
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 1.4rem; font-size: 0.88rem; font-weight: 700; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: 1.5px solid transparent; text-align: center; line-height: 1.2; }
+        .btn-sm { padding: 0.45rem 1rem; font-size: 0.82rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3); }
+        .btn-secondary { background-color: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-medium); box-shadow: var(--shadow-sm); }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-block { width: 100%; border-radius: var(--radius-md); }
+
+        /* NAVBAR */
+        #navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+        .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.25rem; color: var(--text-main); }
+        .logo-text { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; }
+        .logo-img { height: 40px; width: 40px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; font-weight: 600; }
+        .nav-links a { color: var(--text-muted); transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .mobile-toggle { display: none; background: none; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 1.2rem; cursor: pointer; color: var(--text-main); padding: 0.4rem 0.75rem; }
+
+        #mobile-menu { display: none; background-color: var(--bg-card); border-bottom: 1px solid var(--border-subtle); padding: 0 1.5rem 1.5rem 1.5rem; box-shadow: var(--shadow-md); }
+        #mobile-menu.show { display: block; }
+        #mobile-menu a.nav-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; font-size: 1rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--border-subtle); }
+
+        /* FILTER & CONTROLS */
+        .event-controls { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .control-group { display: flex; align-items: center; gap: 0.6rem; width: 100%; max-width: 380px; background: var(--bg-card); border: 1.5px solid var(--border-medium); border-radius: var(--radius-full); padding: 0.6rem 1.2rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
+        .control-group:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .search-box { flex: 1; border: none; outline: none; background: transparent; font-size: 0.95rem; color: var(--text-main); }
+        .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .filter-tab { padding: 0.6rem 1.2rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; background: var(--bg-card); border: 1.5px solid var(--border-medium); color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+        .filter-tab.active, .filter-tab:hover { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+
+        /* EVENT GRID & CARDS */
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; width: 100%; }
+        .event-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; flex-direction: column; }
+        .event-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--border-accent); }
+        
+        .event-img-box { width: 100%; height: 210px; position: relative; background: #e2e8f0; overflow: hidden; }
+        .event-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .event-card:hover .event-img { transform: scale(1.06); }
+        
+        .event-status-badge { position: absolute; top: 1rem; left: 1rem; background: rgba(15, 23, 42, 0.75); color: #fff; padding: 0.3rem 0.85rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.15); letter-spacing: 0.02em; }
+        .event-status-badge.upcoming { background: rgba(37, 99, 235, 0.85); }
+        .event-status-badge.ended { background: rgba(100, 116, 139, 0.85); }
+        
+        .event-content { padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .event-date { font-size: 0.82rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.01em; }
+        .event-title { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .event-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .event-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem; margin-top: auto; gap: 1rem; }
+        .event-speaker { display: flex; align-items: center; gap: 0.65rem; font-size: 0.85rem; font-weight: 600; color: var(--text-main); max-width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .event-speaker img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--border-medium); flex-shrink: 0; }
+        .event-speaker span { overflow: hidden; text-overflow: ellipsis; }
+
+        /* MODAL PENDAFTARAN */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--bg-card); border-radius: var(--radius-xl); width: 100%; max-width: 480px; padding: 2.5rem; position: relative; box-shadow: var(--shadow-lg); transform: scale(0.95); transition: transform 0.3s ease; }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(0,0,0,0.05); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
+        .modal-close:hover { background: rgba(239,68,68,0.1); color: #ef4444; }
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-group label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main); }
+        .form-control { width: 100%; padding: 0.8rem 1rem; border-radius: var(--radius-md); border: 1.5px solid var(--border-medium); background-color: var(--bg-body); font-size: 0.95rem; color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); background-color: #fff; }
+
+        /* FOOTER */
+        .footer-section { background: #ffffff; border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .event-controls { flex-direction: column; align-items: stretch; }
+            .control-group { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="https://sitenexs.com" class="logo">
+                <img src="https://sitenexs.com/assets/logo/logo.png" alt="Sitenexs Logo" class="logo-img" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Sitenexs&background=2563eb&color=fff&size=64&rounded=true';">
+                <span class="logo-text">Sitenexs <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Events</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#katalog" class="active">Daftar Event</a>
+                <a href="https://sitenexs.com" target="_blank" rel="noopener noreferrer">Utama Sitenexs <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i></a>
+            </nav>
+
+            <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Buka Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu">
+            <a href="#katalog" class="nav-item">Daftar Event <i class="fas fa-chevron-right text-muted" style="font-size: 0.8rem;"></i></a>
+            <a href="https://sitenexs.com" target="_blank" rel="noopener noreferrer" class="nav-item">Situs Utama Sitenexs <i class="fas fa-external-link-alt text-muted" style="font-size: 0.8rem;"></i></a>
+        </div>
+    </header>
+
+    <!-- KATALOG EVENT (Diberi padding-top lebih lega agar tidak terlalu menempel ke navbar) -->
+    <section id="katalog" class="page-section" style="padding-top: 130px;">
+        <div class="container">
+            <div class="event-controls">
+                <div class="control-group">
+                    <i class="fas fa-search text-muted"></i>
+                    <input type="text" id="searchEvent" class="search-box" placeholder="Cari judul event atau topik...">
+                </div>
+
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="filter-tab active" data-filter="all">Semua</button>
+                    <button class="filter-tab" data-filter="upcoming">Akan Datang</button>
+                    <button class="filter-tab" data-filter="ended">Selesai</button>
+                </div>
+            </div>
+
+            <!-- Grid Event Dinamis -->
+            <div id="eventsGrid" class="events-grid">
+                <div style="text-align: center; grid-column: 1 / -1; padding: 3rem; color: var(--text-muted);">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <p style="font-weight: 600;">Memuat daftar event...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL PENDAFTARAN EVENT -->
+    <div id="registerModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Pendaftaran Event</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;" id="modalEventTitle">Judul Event</p>
+            
+            <form id="registerForm">
+                <input type="hidden" id="inputEventId">
+                <div class="form-group">
+                    <label>Nama Lengkap / Usaha</label>
+                    <input type="text" id="regName" required class="form-control" placeholder="Contoh: Budi Santoso">
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp</label>
+                    <input type="tel" id="regPhone" required class="form-control" placeholder="085177137899">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.75rem;">
+                    <label>Email Aktif</label>
+                    <input type="email" id="regEmail" required class="form-control" placeholder="budi@email.com">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Konfirmasi Pendaftaran</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="container">
+            <p>&copy; 2026 Sitenexs Events. Platform resmi acara & webinar di bawah naungan <a href="https://sitenexs.com" style="color: var(--primary); font-weight: 700;">Sitenexs</a>.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT INTERAKSI, FIREBASE & SUPABASE -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // Inisialisasi Firebase
+        const firebaseConfig = {
+            apiKey: 'AIzaSyDuN4zlRaSnmcUSuXE_E84IE7d3Mz8E-N4',
+            authDomain: 'sitenexs-62919.firebaseapp.com',
+            projectId: 'sitenexs-62919',
+            storageBucket: 'sitenexs-62919.firebasestorage.app',
+            messagingSenderId: '1060348110644',
+            appId: '1:1060348110644:web:e45af14d5f26a9cf8e6761',
+            measurementId: 'G-C7YL0Q7YRQ'
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let eventsData = [];
+
+        async function fetchEvents() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "events"));
+                eventsData = [];
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    eventsData.push({
+                        id: docSnap.id,
+                        judul: data.judul || 'Judul Event',
+                        deskripsi: data.deskripsi || '',
+                        eventLink: data.eventLink || '',
+                        tanggal: data.tanggal || 'Segera',
+                        status: data.status || 'upcoming',
+                        imageUrl: data.imageUrl || '',
+                        speakerNama: data.speakerNama || 'Tim Sitenexs',
+                        speakerFoto: data.speakerFoto || ''
+                    });
+                });
+                renderEvents(eventsData);
+            } catch (error) {
+                console.error("Gagal memuat event dari Firestore:", error);
+                const grid = document.getElementById('eventsGrid');
+                if (grid) {
+                    grid.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 3rem; font-weight: 600; font-size: 1.1rem;">Belum ada Event</p>';
+                }
+            }
+        }
+
+        function renderEvents(data) {
+            const grid = document.getElementById('eventsGrid');
+            if (!grid) return;
+
+            if (data.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 3rem; font-weight: 600; font-size: 1.1rem;">Belum ada Event</p>';
+                return;
+            }
+
+            let html = '';
+            data.forEach(ev => {
+                const statusClass = ev.status === 'ended' ? 'ended' : 'upcoming';
+                const statusText = ev.status === 'ended' ? 'Selesai' : 'Akan Datang';
+
+                const actionButton = ev.eventLink 
+                    ? `<a href="${ev.eventLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Gabung <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>`
+                    : `<button class="btn btn-primary btn-sm register-btn" data-id="${ev.id}" data-title="${ev.judul}">Daftar</button>`;
+
+                html += `
+                    <div class="event-card">
+                        <div class="event-img-box">
+                            <span class="event-status-badge ${statusClass}">${statusText}</span>
+                            <img src="${ev.imageUrl}" alt="${ev.judul}" class="event-img" onerror="this.src='https://ui-avatars.com/api/?name=Event&background=2563eb&color=fff';">
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date"><i class="fas fa-calendar-day"></i> ${ev.tanggal}</div>
+                            <h3 class="event-title">${ev.judul}</h3>
+                            <p class="event-desc">${ev.deskripsi}</p>
+                            <div class="event-footer">
+                                <div class="event-speaker">
+                                    <img src="${ev.speakerFoto}" alt="${ev.speakerNama}" onerror="this.src='https://ui-avatars.com/api/?name=U&background=2563eb&color=fff';">
+                                    <span>${ev.speakerNama}</span>
+                                </div>
+                                ${actionButton}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+
+            document.querySelectorAll('.register-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const eventId = btn.getAttribute('data-id');
+                    const eventTitle = btn.getAttribute('data-title');
+                    openRegisterModal(eventId, eventTitle);
+                });
+            });
+        }
+
+        // Filter dan Search Logic
+        const searchInput = document.getElementById('searchEvent');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        let currentFilter = 'all';
+
+        function filterAndSearchEvents() {
+            const query = searchInput.value.toLowerCase();
+            const filtered = eventsData.filter(ev => {
+                const matchesQuery = ev.judul.toLowerCase().includes(query) || ev.deskripsi.toLowerCase().includes(query);
+                const matchesTab = currentFilter === 'all' || ev.status === currentFilter;
+                return matchesQuery && matchesTab;
+            });
+            renderEvents(filtered);
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', filterAndSearchEvents);
+        }
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.getAttribute('data-filter');
+                filterAndSearchEvents();
+            });
+        });
+
+        // Modal Pendaftaran Interaktif
+        const modal = document.getElementById('registerModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalEventTitle = document.getElementById('modalEventTitle');
+        const inputEventId = document.getElementById('inputEventId');
+        const registerForm = document.getElementById('registerForm');
+
+        function openRegisterModal(id, title) {
+            inputEventId.value = id;
+            modalEventTitle.textContent = title;
+            modal.classList.add('active');
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener('click', () => modal.classList.remove('active'));
+        }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const nama = document.getElementById('regName').value.trim();
+                const replyPhone = document.getElementById('regPhone').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const eventId = inputEventId.value;
+
+                try {
+                    await addDoc(collection(db, "event_registrations"), {
+                        eventId: eventId,
+                        nama: nama,
+                        phone: replyPhone,
+                        email: email,
+                        createdAt: serverTimestamp()
+                    });
+                    alert('Pendaftaran berhasil! Tim Sitenexs akan segera mengirimkan tautan akses event ke WhatsApp Anda.');
+                    modal.classList.remove('active');
+                    registerForm.reset();
+                } catch (err) {
+                    console.error("Gagal menyimpan pendaftaran:", err);
+                    alert('Terjadi kesalahan saat mendaftar. Silakan coba lagi.');
+                }
+            });
+        }
+
+        // Navigasi Mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('show'));
+        }
+
+        // Jalankan fetch saat halaman dimuat
+        fetchEvents();
+    </script>
+</body>
+</html>
