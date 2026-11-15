@@ -138,14 +138,9 @@
 
         /* KATEGORI SOSMED BADGE DI ADMIN */
         .platform-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.2rem 0.6rem; border-radius: var(--radius-full);
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
         }
         .platform-badge.instagram { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
         .platform-badge.whatsapp { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
@@ -155,55 +150,30 @@
 
         /* LIST ITEM STYLING */
         .list-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-height: 520px;
-            overflow-y: auto;
-            padding-right: 0.25rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            max-height: 520px; overflow-y: auto; padding-right: 0.25rem;
         }
 
         .admin-item-card {
-            background: var(--bg-body);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-            transition: var(--transition);
+            background: var(--bg-body); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg); padding: 1.25rem; display: flex;
+            flex-direction: column; gap: 0.85rem; transition: var(--transition);
         }
         .admin-item-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-sm); }
         
-        .item-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        
+        .item-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
         .item-info h4 { font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem; }
         .item-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
         
         .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            background: #ecfdf5;
-            color: #047857;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 800;
-            border: 1px solid #a7f3d0;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; background: #ecfdf5; color: #047857;
+            padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.8rem;
+            font-weight: 800; border: 1px solid #a7f3d0; white-space: nowrap;
         }
 
         .item-actions {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: flex-end;
-            border-top: 1px dashed var(--border-subtle);
-            padding-top: 0.75rem;
+            display: flex; gap: 0.5rem; justify-content: flex-end;
+            border-top: 1px dashed var(--border-subtle); padding-top: 0.75rem;
         }
 
         .footer-simple { text-align: center; padding: 2.5rem 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); margin-top: 3rem; }
@@ -431,16 +401,27 @@
                     const s = d.data();
                     if (s.status === 'pending') {
                         pendingCount++;
+                        let screenshotHtml = s.proofImageUrl ? `
+                            <div style="margin-top: 0.5rem;">
+                                <a href="${s.proofImageUrl}" target="_blank">
+                                    <img src="${s.proofImageUrl}" alt="Bukti Screenshot" style="width: 80px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-medium);">
+                                </a>
+                            </div>
+                        ` : '';
+
                         html += `
                             <div class="admin-item-card">
-                                <div class="item-info">
-                                    <h4>${s.missionTitle}</h4>
-                                    <p><b>Akun/Username:</b> ${s.username}</p>
-                                    <p><b>Bukti Link:</b> <a href="${s.proof}" target="_blank" style="color: var(--primary); text-decoration: underline;">${s.proof}</a></p>
+                                <div class="item-row">
+                                    <div class="item-info">
+                                        <h4>${s.missionTitle}</h4>
+                                        <p><b>Akun/Username:</b> ${s.username}</p>
+                                        <p><b>Bukti Link/Catatan:</b> ${s.proof}</p>
+                                        ${screenshotHtml}
+                                    </div>
+                                    <div class="badge-pill">+Rp ${Number(s.reward).toLocaleString('id-ID')}</div>
                                 </div>
-                                <div class="badge-pill">+Rp ${Number(s.reward).toLocaleString('id-ID')}</div>
                                 <div class="item-actions">
-                                    <button class="btn btn-success btn-sm" onclick="approveSubmission('${d.id}', '${s.deviceId}', ${s.reward})"><i class="fas fa-check"></i> Setujui</button>
+                                    <button class="btn btn-success btn-sm" onclick="approveSubmission('${d.id}', '${s.deviceId || s.uid}', ${s.reward})"><i class="fas fa-check"></i> Setujui</button>
                                     <button class="btn btn-danger btn-sm" onclick="rejectSubmission('${d.id}')"><i class="fas fa-times"></i> Tolak</button>
                                 </div>
                             </div>
@@ -563,6 +544,16 @@
         }
 
         loadAdminData();
+    </script>
+
+    <script>
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastDesc').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
     </script>
 </body>
 </html>
