@@ -5,322 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sitenexs — Event</title>
     
-    <!-- Meta SEO -->
     <meta name="description" content="Sitenexs Event. Mitra transformasi digital UMKM Indonesia.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://sitenexs.com/event">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://sitenexs.com/assets/logo/logo.png" id="faviconImg">
-
-    <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #eff6ff;
-            --accent: #10b981;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-alt: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-subtle: #e2e8f0;
-            --border-medium: #cbd5e1;
-            --border-accent: #93c5fd;
-            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
-            --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.1);
-            --shadow-card: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
-            --radius-sm: 0.375rem;
-            --radius-md: 0.625rem;
-            --radius-lg: 1rem;
-            --radius-xl: 1.5rem;
-            --radius-full: 9999px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #eff6ff;
+            --accent: #10b981; --bg-body: #f8fafc; --bg-card: #ffffff;
+            --text-main: #0f172a; --text-muted: #475569; --border-subtle: #e2e8f0;
+            --border-medium: #cbd5e1; --shadow-card: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+            --radius-md: 0.625rem; --radius-lg: 1rem; --radius-xl: 1.5rem; --radius-full: 9999px;
+            --transition: all 0.3s ease;
         }
-
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 15px; width: 100%; }
-        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
-        button, input, select, textarea { font-family: inherit; outline: none; }
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
-
-        .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
-            background-size: 32px 32px;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .bg-grid-pattern { background-image: linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px); background-size: 32px 32px; }
         .bg-gradient-soft { background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); }
-
-        .page-section { position: relative; width: 100%; padding: 5.5rem 0; display: flex; align-items: center; justify-content: center; scroll-margin-top: 90px; }
-
-        .text-primary { color: var(--primary); }
-        .text-accent { color: var(--accent); }
-
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: 1px solid transparent; text-align: center; line-height: 1.2; }
-        .btn-sm { padding: 0.45rem 1.1rem; font-size: 0.85rem; }
+        .page-section { padding: 5.5rem 0; display: flex; justify-content: center; }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full); cursor: pointer; border: none; }
         .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35); }
-        .btn-secondary { background-color: #ffffff; color: var(--text-main); border: 1px solid var(--border-medium); box-shadow: var(--shadow-sm); }
-        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .btn-outline-primary { background-color: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
-        .btn-outline-primary:hover { background-color: var(--primary-light); transform: translateY(-3px); }
+        .btn-secondary { background-color: #ffffff; color: var(--text-main); border: 1px solid var(--border-medium); }
         .btn-block { width: 100%; border-radius: var(--radius-md); }
 
-        /* TOAST NOTIFIKASI */
         .sitenexs-toast {
             position: fixed; top: 100px; right: 20px; background: #ffffff; color: var(--text-main);
             padding: 1rem 1.25rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
             border: 1px solid var(--border-subtle); z-index: 99999; display: flex; align-items: center; gap: 0.75rem;
-            transform: translateY(-20px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(-20px); opacity: 0; transition: all 0.4s ease;
         }
         .sitenexs-toast.show { transform: translateY(0); opacity: 1; }
-        .sitenexs-toast-icon {
-            width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981;
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
-        }
-        .sitenexs-toast-text h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.1rem; }
-        .sitenexs-toast-text p { font-size: 0.8rem; color: var(--text-muted); }
 
-        /* NAVBAR STYLING */
-        #navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);
-        }
+        #navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); }
         .nav-container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
-        .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.25rem; color: var(--text-main); flex-shrink: 0; }
-        .logo-text { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; }
-        .logo-img { height: 38px; width: 38px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
+        .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.25rem; }
+        .logo-text { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; }
         .nav-links { display: flex; align-items: center; gap: 1.2rem; font-size: 0.9rem; font-weight: 600; }
-        .nav-links a { color: var(--text-muted); transition: var(--transition); }
-        .nav-links a:hover { color: var(--primary); }
 
-        /* USER PROFILE BADGE IN NAVBAR */
-        .user-profile-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.3rem 0.85rem 0.3rem 0.35rem; background: #ffffff;
-            border: 1px solid var(--border-medium); border-radius: var(--radius-full);
-            box-shadow: var(--shadow-sm); font-size: 0.88rem; font-weight: 700; color: var(--text-main);
-        }
-        .user-initial-avatar {
-            width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 0.82rem; font-weight: 800; flex-shrink: 0;
-        }
+        .user-profile-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.85rem 0.3rem 0.35rem; background: #ffffff; border: 1px solid var(--border-medium); border-radius: var(--radius-full); font-size: 0.88rem; font-weight: 700; }
+        .user-initial-avatar { width: 30px; height: 30px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 800; }
 
-        /* PLATFORM BADGE DI EVENT */
-        .platform-badge {
-            display: inline-flex; align-items: center; gap: 0.35rem;
-            padding: 0.2rem 0.6rem; border-radius: var(--radius-full);
-            font-size: 0.72rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;
-        }
-        .platform-badge.instagram { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
+        .event-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; width: 100%; }
+        .wallet-card { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-card); display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
+        .wallet-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); }
+        .wallet-info h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800; }
+        .wallet-info .balance { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-top: 0.25rem; }
+
+        .tabs { display: flex; background: var(--bg-card); border-radius: var(--radius-lg); padding: 5px; border: 1px solid var(--border-subtle); }
+        .tab-btn { flex: 1; background: none; border: none; padding: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: var(--radius-md); transition: var(--transition); }
+        .tab-btn.active { background-color: var(--primary); color: white; }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+
+        .task-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .task-img-container { width: 100%; height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .task-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .task-body { padding: 1.5rem; }
+        .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; gap: 1rem; }
+        .task-title { font-size: 1.05rem; font-weight: 800; }
+        .task-reward { display: inline-flex; align-items: center; background: #ecfdf5; color: #047857; padding: 0.35rem 0.9rem; border-radius: var(--radius-full); font-size: 0.88rem; font-weight: 800; border: 1px solid #a7f3d0; }
+        .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1rem; }
+        
+        .platform-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; }
         .platform-badge.whatsapp { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+        .platform-badge.instagram { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
         .platform-badge.tiktok { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
         .platform-badge.facebook { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
         .platform-badge.lainnya { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
 
-        /* WALLET & EVENT CONTAINER */
-        .event-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
-        
-        .wallet-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
-            padding: 2rem; box-shadow: var(--shadow-card);
-            display: flex; justify-content: space-between; align-items: center;
-            position: relative; overflow: hidden;
-        }
-        .wallet-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); }
-        .wallet-info h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; }
-        .wallet-info .balance { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-top: 0.25rem; letter-spacing: -0.02em; }
+        .post-text-box { background: #f8fafc; border: 1px dashed var(--border-medium); border-radius: var(--radius-md); padding: 0.85rem; font-size: 0.88rem; margin-bottom: 1.25rem; }
+        .post-text-box textarea { width: 100%; background: transparent; border: none; resize: none; font-family: inherit; font-size: 0.88rem; color: var(--text-main); }
+        .task-action { display: flex; gap: 0.75rem; }
+        .task-action .btn { flex: 1; }
 
-        /* TABS */
-        .tabs { display: flex; background: var(--bg-card); border-radius: var(--radius-lg); padding: 5px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
-        .tab-btn { flex: 1; background: none; border: none; padding: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: var(--radius-md); transition: var(--transition); font-size: 0.9rem; }
-        .tab-btn.active { background-color: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-
-        .section-content { display: none; }
-        .section-content.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* TASK CARD WITH IMAGE */
-        .task-card {
-            background: var(--bg-card); border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.25rem;
-            box-shadow: var(--shadow-sm); transition: var(--transition);
-        }
-        .task-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-        
-        .task-img-container {
-            width: 100%; height: 180px; background: var(--bg-alt);
-            overflow: hidden; border-bottom: 1px solid var(--border-subtle);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .task-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .task-card:hover .task-img-container img { transform: scale(1.03); }
-
-        .task-body { padding: 1.5rem; }
-        .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; gap: 1rem; }
-        .task-title { font-size: 1.05rem; font-weight: 800; color: var(--text-main); flex: 1; }
-        
-        .task-reward { 
-            display: inline-flex; align-items: center; background: #ecfdf5; color: #047857; 
-            padding: 0.35rem 0.9rem; border-radius: var(--radius-full); font-size: 0.88rem; font-weight: 800; 
-            border: 1px solid #a7f3d0; white-space: nowrap; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.08); 
-        }
-
-        .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
-        
-        /* POST TEXT BOX */
-        .post-text-box {
-            background: var(--bg-body); border: 1px dashed var(--border-medium);
-            border-radius: var(--radius-md); padding: 0.85rem 1rem; font-size: 0.88rem;
-            color: var(--text-main); margin-bottom: 1.25rem; position: relative;
-        }
-        .post-text-box p { margin-bottom: 0.3rem; font-weight: 700; font-size: 0.8rem; color: var(--text-muted); }
-        .post-text-box textarea { width: 100%; background: transparent; border: none; font-size: 0.88rem; color: var(--text-main); resize: none; font-family: inherit; }
-
-        .task-action { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .task-action .btn { flex: 1; min-width: 130px; }
-
-        /* RIWAYAT ITEM STYLE */
-        .history-item {
-            background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
-            padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm);
-        }
-        .history-info h4 { font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem; }
+        .history-item { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .history-info h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.25rem; }
         .history-info p { font-size: 0.85rem; color: var(--text-muted); }
         .history-status { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
         .status-badge { font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.7rem; border-radius: var(--radius-full); text-transform: uppercase; }
-        .status-badge.pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .status-badge.approved { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .status-badge.rejected { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .status-badge.pending { background: #fef3c7; color: #92400e; }
+        .status-badge.approved { background: #dcfce7; color: #166534; }
+        .status-badge.rejected { background: #fee2e2; color: #991b1b; }
         .history-reward-add { font-size: 0.95rem; font-weight: 800; color: #059669; }
 
-        /* MODAL */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px);
-            justify-content: center; align-items: center; padding: 1.5rem; z-index: 9999;
-        }
-        .modal-content {
-            background: var(--bg-card); width: 100%; max-width: 460px; padding: 2rem;
-            border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-subtle);
-            animation: scaleUp 0.3s ease;
-        }
-        @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 1.5rem; z-index: 9999; }
+        .modal-content { background: var(--bg-card); width: 100%; max-width: 460px; padding: 2rem; border-radius: var(--radius-xl); box-shadow: 0 20px 35px rgba(0,0,0,0.1); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
-        .modal-header h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
-        .close-btn { background: rgba(0,0,0,0.05); border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .close-btn:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-
+        .close-btn { background: rgba(0,0,0,0.05); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
         .form-group { margin-bottom: 1.25rem; text-align: left; }
-        .form-group label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
-        .form-control { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-medium); border-radius: var(--radius-md); font-size: 0.95rem; background-color: var(--bg-body); color: var(--text-main); transition: var(--transition); }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); background-color: #ffffff; }
-
+        .form-group label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .form-control { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-medium); border-radius: var(--radius-md); font-size: 0.95rem; background-color: var(--bg-body); color: var(--text-main); }
         .footer-simple { text-align: center; padding: 3rem 0; font-size: 0.88rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); margin-top: 4rem; }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .wallet-card { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
-            .wallet-card .btn-primary { width: 100%; }
-            .task-action { flex-direction: column; }
-            .task-action .btn { width: 100%; }
-            .history-item { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-            .history-status { align-items: flex-start; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <header id="navbar">
         <div class="container nav-container">
             <a href="https://sitenexs.com" class="logo">
-                <img src="https://sitenexs.com/assets/logo/logo.png" alt="Sitenexs Logo" class="logo-img" id="navLogoImg" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Sitenexs&background=2563eb&color=fff&size=64&rounded=true';">
+                <img src="https://sitenexs.com/assets/logo/logo.png" alt="Logo" class="logo-img">
                 <span class="logo-text">SiteNexs</span>
             </a>
-
             <nav class="nav-links">
-                <a href="https://sitenexs.com/#demo-produk">Demo</a>
-                <a href="https://sitenexs.com/#solusi-digital">Solusi</a>
-                <a href="https://sitenexs.com/#harga">Harga</a>
-                <a href="https://sitenexs.com/#tentang">Tentang Kami</a>
-                <a href="admin.html" style="color: var(--primary); font-weight: 700;">
-                    Admin Panel <i class="fas fa-tools" style="font-size: 0.75rem;"></i>
-                </a>
+                <a href="admin.html" style="color: var(--primary); font-weight: 700;">Admin Panel</a>
             </nav>
-
-            <!-- Bagian Tombol Masuk / Inisial Akun -->
             <div id="authNavContainer">
-                <a href="sign-in.html" class="btn btn-primary btn-sm">
-                    <i class="fas fa-sign-in-alt"></i> Masuk
-                </a>
+                <a href="sign-in.html" class="btn btn-primary btn-sm"><i class="fas fa-sign-in-alt"></i> Masuk</a>
             </div>
         </div>
     </header>
 
-    <!-- MAIN EVENT SECTION -->
-    <section class="page-section bg-gradient-soft bg-grid-pattern" style="padding-top: 120px; padding-bottom: 3rem;">
+    <section class="page-section bg-gradient-soft bg-grid-pattern" style="padding-top: 120px;">
         <div class="container">
             <div class="event-container">
-                <!-- Informasi Saldo -->
                 <div class="wallet-card">
                     <div class="wallet-info">
                         <h3>Saldo Reward Anda</h3>
                         <div class="balance" id="userBalance">Rp 0</div>
                     </div>
-                    <button class="btn btn-primary" onclick="showWithdrawModal()">
-                        <i class="fas fa-wallet"></i> Tarik Saldo
-                    </button>
+                    <button class="btn btn-primary" onclick="showWithdrawModal()"><i class="fas fa-wallet"></i> Tarik Saldo</button>
                 </div>
 
-                <!-- Navigasi Tab -->
                 <div class="tabs">
                     <button class="tab-btn active" onclick="switchTab('tasks')"><i class="fas fa-tasks"></i> Misi Tersedia</button>
                     <button class="tab-btn" onclick="switchTab('history')"><i class="fas fa-history"></i> Riwayat</button>
                 </div>
 
-                <!-- Bagian Misi Tersedia -->
                 <div id="tasksSection" class="section-content active">
                     <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
-                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 0.75rem; display: block;"></i>
-                        Memuat daftar misi dari database...
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 0.75rem; display: block;"></i> Memuat misi...
                     </div>
                 </div>
 
-                <!-- Bagian Riwayat -->
                 <div id="historySection" class="section-content">
                     <div id="historyListContainer">
-                        <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
-                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 0.75rem; display: block;"></i>
-                            Memuat riwayat tugas...
-                        </div>
+                        <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Memuat riwayat...</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <div class="container">
-        <div class="footer-simple">
-            &copy; 2026 Sitenexs. Solusi Digital UMKM Indonesia. All rights reserved.
-        </div>
-    </div>
+    <div class="container"><div class="footer-simple">&copy; 2026 Sitenexs. All rights reserved.</div></div>
 
-    <!-- Modal Submit Bukti Tugas (Wajib Screenshot) -->
     <div class="modal" id="submitModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -329,14 +164,14 @@
             </div>
             <div class="form-group">
                 <label>Akun / Username Anda</label>
-                <input type="text" id="taskInput" class="form-control" placeholder="Masukkan username atau akun Anda" required>
+                <input type="text" id="taskInput" class="form-control" placeholder="Masukkan username Anda" required>
             </div>
             <div class="form-group">
                 <label>Link Postingan / Keterangan Bukti</label>
-                <input type="text" id="proofLink" class="form-control" placeholder="Contoh link atau catatan verifikasi">
+                <input type="text" id="proofLink" class="form-control" placeholder="Contoh link atau catatan">
             </div>
             <div class="form-group">
-                <label>Upload Bukti Screenshot <span style="color: #ef4444;">*Wajib</span></label>
+                <label>Upload Screenshot Bukti <span style="color: #ef4444;">*Wajib</span></label>
                 <input type="file" id="proofImageFile" class="form-control" accept="image/*" required>
             </div>
             <button class="btn btn-primary btn-block" id="submitTaskBtn" onclick="submitTask()">
@@ -345,7 +180,6 @@
         </div>
     </div>
 
-    <!-- Modal Tarik Saldo -->
     <div class="modal" id="withdrawModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -358,20 +192,16 @@
                     <option value="DANA">DANA E-Wallet</option>
                     <option value="OVO">OVO / GoPay</option>
                     <option value="BCA">Bank BCA</option>
-                    <option value="BRI">Bank BRI</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Nomor Akun / Rekening Tujuan</label>
                 <input type="text" id="accountNumber" class="form-control" placeholder="Contoh: 085177137899">
             </div>
-            <button class="btn btn-primary btn-block" onclick="processWithdraw()">
-                <i class="fas fa-paper-plane"></i> Ajukan Penarikan Saldo
-            </button>
+            <button class="btn btn-primary btn-block" onclick="processWithdraw()">Ajukan Penarikan</button>
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div class="sitenexs-toast" id="toast">
         <div class="sitenexs-toast-icon"><i class="fas fa-check"></i></div>
         <div class="sitenexs-toast-text">
@@ -380,7 +210,6 @@
         </div>
     </div>
 
-    <!-- FIREBASE INTEGRATION SCRIPT -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
         import { getFirestore, collection, getDocs, addDoc, doc, getDoc } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
@@ -401,10 +230,26 @@
         const auth = getAuth(app);
 
         let currentUserUid = localStorage.getItem('sitenexs_uid');
-        let currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
-        document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
-
+        let currentBalance = 0;
         let selectedMission = null;
+
+        async function fetchUserBalance(uid) {
+            try {
+                if (uid && !uid.startsWith('device_')) {
+                    const userDoc = await getDoc(doc(db, "users", uid));
+                    if (userDoc.exists()) {
+                        currentBalance = Number(userDoc.data().balance || 0);
+                    } else {
+                        currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
+                    }
+                } else {
+                    currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
+                }
+            } catch (e) {
+                currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
+            }
+            document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
+        }
 
         onAuthStateChanged(auth, async (user) => {
             const authContainer = document.getElementById('authNavContainer');
@@ -422,24 +267,21 @@
                 } catch (e) {}
 
                 const initial = displayName.charAt(0).toUpperCase();
-
                 authContainer.innerHTML = `
                     <div class="user-profile-badge" title="${displayName}">
                         <div class="user-initial-avatar">${initial}</div>
-                        <span style="max-width: 90px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${displayName.split(' ')[0]}</span>
+                        <span>${displayName.split(' ')[0]}</span>
                     </div>
                 `;
             } else {
                 authContainer.innerHTML = `
-                    <a href="sign-in.html" class="btn btn-primary btn-sm">
-                        <i class="fas fa-sign-in-alt"></i> Masuk
-                    </a>
+                    <a href="sign-in.html" class="btn btn-primary btn-sm"><i class="fas fa-sign-in-alt"></i> Masuk</a>
                 `;
             }
+            await fetchUserBalance(currentUserUid);
             fetchMissions();
         });
 
-        // Fetch Misi Tersedia
         async function fetchMissions() {
             const tasksSection = document.getElementById('tasksSection');
             if (!tasksSection) return;
@@ -470,83 +312,50 @@
                     const m = docSnap.data();
                     countActive++;
                     const rewardFormatted = Number(m.reward || 0).toLocaleString('id-ID');
-                    
                     const platform = m.platform || 'lainnya';
-                    let iconClass = 'fa-globe';
-                    if (platform === 'instagram') iconClass = 'fab fa-instagram';
-                    else if (platform === 'whatsapp') iconClass = 'fab fa-whatsapp';
-                    else if (platform === 'tiktok') iconClass = 'fab fa-tiktok';
-                    else if (platform === 'facebook') iconClass = 'fab fa-facebook';
 
-                    let imgHtml = '';
-                    if (m.imageUrl) {
-                        imgHtml = `
-                            <div class="task-img-container">
-                                <img src="${m.imageUrl}" alt="${m.title}" onerror="this.parentElement.style.display='none';">
-                            </div>
-                        `;
-                    }
-
-                    let postTextBox = '';
-                    if (m.postText) {
-                        const safeText = m.postText.replace(/"/g, '&quot;');
-                        postTextBox = `
-                            <div class="post-text-box">
-                                <p><i class="fas fa-quote-left"></i> Teks Postingan / Caption:</p>
-                                <textarea rows="2" readonly id="text_${missionId}">${m.postText}</textarea>
-                                <button class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; width: 100%; font-size: 0.78rem;" onclick="copyPostText('text_${missionId}')">
-                                    <i class="fas fa-copy"></i> Salin Teks Postingan
-                                </button>
-                            </div>
-                        `;
-                    }
+                    let imgHtml = m.imageUrl ? `<div class="task-img-container"><img src="${m.imageUrl}" alt="${m.title}"></div>` : '';
+                    let postTextBox = m.postText ? `
+                        <div class="post-text-box">
+                            <p><i class="fas fa-quote-left"></i> Caption:</p>
+                            <textarea rows="2" readonly id="text_${missionId}">${m.postText}</textarea>
+                            <button class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; width: 100%; font-size: 0.78rem;" onclick="copyPostText('text_${missionId}')">Salin Teks</button>
+                        </div>
+                    ` : '';
 
                     html += `
                         <div class="task-card">
                             ${imgHtml}
                             <div class="task-body">
-                                <span class="platform-badge ${platform}"><i class="${iconClass}"></i> ${platform}</span>
+                                <span class="platform-badge ${platform}">${platform}</span>
                                 <div class="task-header">
                                     <div class="task-title">${m.title}</div>
                                     <div class="task-reward">+Rp ${rewardFormatted}</div>
                                 </div>
-                                <div class="task-desc">
-                                    ${m.desc}
-                                </div>
+                                <div class="task-desc">${m.desc}</div>
                                 ${postTextBox}
                                 <div class="task-action">
-                                    <a href="${m.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                        <i class="fas fa-external-link-alt text-primary"></i> Buka Tautan
-                                    </a>
-                                    <button class="btn btn-primary" onclick="openSubmitModal('${missionId}', '${m.title.replace(/'/g, "\\'")}', ${m.reward})">
-                                        <i class="fas fa-paper-plane"></i> Kumpul Tugas
-                                    </button>
+                                    <a href="${m.url || '#'}" target="_blank" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Buka Tautan</a>
+                                    <button class="btn btn-primary" onclick="openSubmitModal('${missionId}', '${m.title.replace(/'/g, "\\'")}', ${m.reward})">Kumpul Tugas</button>
                                 </div>
                             </div>
                         </div>
                     `;
                 });
 
-                if (countActive === 0) {
-                    tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Semua misi telah diselesaikan atau sedang dalam verifikasi!</div>';
-                } else {
-                    tasksSection.innerHTML = html;
-                }
+                tasksSection.innerHTML = countActive === 0 ? '<div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Semua misi telah diselesaikan atau dalam verifikasi!</div>' : html;
             } catch (error) {
-                console.error("Gagal memuat misi:", error);
-                tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: #ef4444; padding: 3rem 1.5rem;">Gagal memuat daftar misi dari database.</div>';
+                tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: red; padding: 3rem 1.5rem;">Gagal memuat misi.</div>';
             }
         }
 
         window.copyPostText = function(elementId) {
             const textarea = document.getElementById(elementId);
             textarea.select();
-            textarea.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(textarea.value);
-            showToast('Berhasil Disalin!', 'Teks postingan berhasil disalin ke clipboard.');
+            showToast('Berhasil Disalin!', 'Teks berhasil disalin.');
         }
 
-        // Fetch Riwayat Tugas Pengguna
         window.loadHistory = async function() {
             const historyContainer = document.getElementById('historyListContainer');
             if (!historyContainer) return;
@@ -560,27 +369,16 @@
                     const s = sDoc.data();
                     if (s.uid === currentUserUid || s.deviceId === currentUserUid) {
                         count++;
-                        let badgeClass = 'pending';
-                        let statusText = 'Menunggu Verifikasi';
-                        if (s.status === 'approved') {
-                            badgeClass = 'approved';
-                            statusText = 'Disetujui (Selesai)';
-                        } else if (s.status === 'rejected') {
-                            badgeClass = 'rejected';
-                            statusText = 'Ditolak Admin';
-                        }
+                        let badgeClass = s.status === 'approved' ? 'approved' : s.status === 'rejected' ? 'rejected' : 'pending';
+                        let statusText = s.status === 'approved' ? 'Disetujui (Selesai)' : s.status === 'rejected' ? 'Ditolak Admin' : 'Menunggu Verifikasi';
 
-                        const rewardAdd = s.status === 'approved' 
-                            ? `<div class="history-reward-add">+Rp ${Number(s.reward).toLocaleString('id-ID')}</div>` 
-                            : `<span style="font-size: 0.82rem; color: var(--text-muted);">Estimasi: Rp ${Number(s.reward).toLocaleString('id-ID')}</span>`;
-
-                        let proofImgThumb = s.proofImageUrl ? `<br><a href="${s.proofImageUrl}" target="_blank" style="color: var(--primary); font-size: 0.8rem; text-decoration: underline;"><i class="fas fa-image"></i> Lihat Screenshot Bukti</a>` : '';
+                        let rewardAdd = s.status === 'approved' ? `<div class="history-reward-add">+Rp ${Number(s.reward).toLocaleString('id-ID')}</div>` : `<span style="font-size: 0.82rem; color: var(--text-muted);">Estimasi: Rp ${Number(s.reward).toLocaleString('id-ID')}</span>`;
 
                         html += `
                             <div class="history-item">
                                 <div class="history-info">
                                     <h4>${s.missionTitle}</h4>
-                                    <p><b>Akun:</b> ${s.username} | <b>Bukti:</b> ${s.proof} ${proofImgThumb}</p>
+                                    <p><b>Akun:</b> ${s.username}</p>
                                 </div>
                                 <div class="history-status">
                                     <span class="status-badge ${badgeClass}">${statusText}</span>
@@ -591,18 +389,8 @@
                     }
                 });
 
-                if (count === 0) {
-                    historyContainer.innerHTML = `
-                        <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
-                            <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.5; display: block;"></i>
-                            Belum ada riwayat tugas yang dikirim.
-                        </div>
-                    `;
-                } else {
-                    historyContainer.innerHTML = html;
-                }
+                historyContainer.innerHTML = count === 0 ? '<div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Belum ada riwayat.</div>' : html;
             } catch (err) {
-                console.error(err);
                 historyContainer.innerHTML = '<p style="text-align: center; color: red;">Gagal memuat riwayat.</p>';
             }
         }
@@ -617,7 +405,6 @@
             document.getElementById('submitModal').style.display = 'none';
         }
 
-        // Kompresi Gambar Bukti Screenshot
         function compressImage(file, maxWidth = 600, quality = 0.7) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -627,19 +414,14 @@
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-
+                        let width = img.width; let height = img.height;
                         if (width > maxWidth) {
                             height = Math.round((height * maxWidth) / width);
                             width = maxWidth;
                         }
-
-                        canvas.width = width;
-                        canvas.height = height;
+                        canvas.width = width; canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
-
                         resolve(canvas.toDataURL('image/jpeg', quality));
                     };
                 };
@@ -652,21 +434,14 @@
             const fileInput = document.getElementById('proofImageFile');
             const submitBtn = document.getElementById('submitTaskBtn');
 
-            if (!taskInput) {
-                alert('Mohon masukkan akun atau username Anda!');
-                return;
-            }
-            if (!fileInput.files || !fileInput.files[0]) {
-                alert('Wajib mengunggah bukti screenshot untuk menyelesaikan misi!');
-                return;
-            }
+            if (!taskInput) { alert('Masukkan username Anda!'); return; }
+            if (!fileInput.files || !fileInput.files[0]) { alert('Wajib mengunggah screenshot!'); return; }
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengunggah bukti...';
+            submitBtn.innerHTML = 'Mengirim...';
 
             try {
                 let proofImageUrl = await compressImage(fileInput.files[0], 600, 0.7);
-
                 await addDoc(collection(db, "submissions"), {
                     missionId: selectedMission.missionId,
                     missionTitle: selectedMission.title,
@@ -681,72 +456,52 @@
                 });
 
                 closeSubmitModal();
-                showToast('Tugas Terkirim!', 'Bukti screenshot berhasil dikirim ke Admin untuk diverifikasi.');
+                showToast('Tugas Terkirim!', 'Bukti berhasil dikirim.');
                 document.getElementById('taskInput').value = '';
                 document.getElementById('proofLink').value = '';
                 fileInput.value = '';
                 fetchMissions();
                 loadHistory();
             } catch (err) {
-                console.error("Gagal mengirim tugas:", err);
-                showToast('Gagal', 'Terjadi kesalahan saat mengirim bukti tugas.', 'error');
+                showToast('Gagal', 'Terjadi kesalahan.', 'error');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Kirim Bukti ke Admin';
+                submitBtn.innerHTML = 'Kirim Bukti ke Admin';
             }
         }
 
         window.showWithdrawModal = function() {
-            if (currentBalance <= 0) {
-                showToast('Saldo Kosong', 'Saldo Anda masih Rp 0, selesaikan misi terlebih dahulu!', 'error');
-                return;
-            }
+            if (currentBalance <= 0) { showToast('Saldo Kosong', 'Saldo masih Rp 0!', 'error'); return; }
             document.getElementById('withdrawModal').style.display = 'flex';
         }
-
-        window.closeWithdrawModal = function() {
-            document.getElementById('withdrawModal').style.display = 'none';
-        }
-
+        window.closeWithdrawModal = function() { document.getElementById('withdrawModal').style.display = 'none'; }
         window.processWithdraw = function() {
-            const accNum = document.getElementById('accountNumber').value.trim();
-            if (!accNum) {
-                showToast('Perhatian', 'Masukkan nomor rekening atau akun tujuan!', 'error');
-                return;
-            }
-
             currentBalance = 0;
-            localStorage.setItem('sitenexs_balance', currentBalance);
+            localStorage.setItem('sitenexs_balance', 0);
             document.getElementById('userBalance').innerText = 'Rp 0';
             closeWithdrawModal();
-            showToast('Penarikan Diajukan', 'Permintaan penarikan saldo berhasil dikirim.');
+            showToast('Penarikan Diajukan', 'Permintaan berhasil dikirim.');
         }
 
-        window.switchTab = function(tabName) {
+        window.switchTab = async function(tabName) {
             const taskBtn = document.querySelectorAll('.tab-btn')[0];
             const historyBtn = document.querySelectorAll('.tab-btn')[1];
             const tasksSec = document.getElementById('tasksSection');
             const historySec = document.getElementById('historySection');
 
             if (tabName === 'tasks') {
-                taskBtn.classList.add('active');
-                historyBtn.classList.remove('active');
-                tasksSec.classList.add('active');
-                historySec.classList.remove('active');
+                taskBtn.classList.add('active'); historyBtn.classList.remove('active');
+                tasksSec.classList.add('active'); historySec.classList.remove('active');
                 fetchMissions();
             } else {
-                historyBtn.classList.add('active');
-                taskBtn.classList.remove('active');
-                historySec.classList.add('active');
-                tasksSec.classList.remove('active');
+                historyBtn.classList.add('active'); taskBtn.classList.remove('active');
+                historySec.classList.add('active'); tasksSec.classList.remove('active');
+                await fetchUserBalance(currentUserUid);
                 loadHistory();
-                
-                currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
-                document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
             }
         }
 
-        function showToast(title, message, type = 'success') {
+        function showToast(title, message) {
             const toast = document.getElementById('toast');
             document.getElementById('toastTitle').innerText = title;
             document.getElementById('toastDesc').innerText = message;
