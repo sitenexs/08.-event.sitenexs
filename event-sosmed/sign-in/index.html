@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitenexs — Masuk & Daftar Akun</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Masuk atau daftar akun Sitenexs untuk mengakses event dan solusi digital UMKM.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://sitenexs.com/assets/logo/logo.png" id="faviconImg">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-subtle: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --shadow-card: 0 25px 50px -12px rgba(37, 99, 235, 0.18);
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.75rem;
+            --radius-full: 9999px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 15px; width: 100%; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.06) 0px, transparent 50%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.25rem;
+        }
+        
+        .auth-container { width: 100%; max-width: 460px; z-index: 2; }
+        
+        .auth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); }
+
+        /* LOGO TEKS MIRIP INDEX.HTML */
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .logo-text {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* TAB TOGGLE */
+        .auth-tabs { display: flex; background: var(--bg-body); border-radius: var(--radius-lg); padding: 5px; margin-bottom: 2rem; border: 1px solid var(--border-subtle); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .auth-tab { flex: 1; background: none; border: none; padding: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: var(--radius-md); transition: var(--transition); font-size: 0.92rem; text-align: center; }
+        .auth-tab.active { background-color: var(--primary); color: white; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+
+        .auth-form { display: none; }
+        .auth-form.active { display: block; animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-group { margin-bottom: 1.25rem; text-align: left; position: relative; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main); }
+        
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i.field-icon { position: absolute; left: 1rem; color: var(--text-muted); font-size: 0.95rem; pointer-events: none; transition: var(--transition); }
+        
+        .form-control { width: 100%; padding: 0.8rem 1rem 0.8rem 2.8rem; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 0.92rem; background-color: var(--bg-body); color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); background-color: #ffffff; }
+        .form-control:focus + i.field-icon, .form-control:focus ~ i.field-icon { color: var(--primary); }
+
+        /* TOGGLE PASSWORD EYE BUTTON */
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .toggle-password:hover { color: var(--primary); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 1.5rem; font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: 1px solid transparent; text-align: center; width: 100%; margin-top: 0.5rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4); }
+
+        .back-home { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; text-align: center; margin-top: 1.75rem; font-size: 0.88rem; color: var(--text-muted); font-weight: 700; transition: var(--transition); }
+        .back-home:hover { color: var(--primary); }
+
+        /* TOAST NOTIFICATION */
+        .sitenexs-toast {
+            position: fixed; top: 30px; right: 20px; background: #ffffff; color: var(--text-main);
+            padding: 1rem 1.25rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+            border: 1px solid var(--border-subtle); z-index: 99999; display: flex; align-items: center; gap: 0.75rem;
+            transform: translateY(-20px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sitenexs-toast.show { transform: translateY(0); opacity: 1; }
+        .sitenexs-toast-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .sitenexs-toast-text h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.1rem; }
+        .sitenexs-toast-text p { font-size: 0.8rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <a href="https://sitenexs.com" class="auth-logo">
+                <span class="logo-text">SiteNexs</span>
+            </a>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Masuk Akun</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')">Daftar Baru</button>
+            </div>
+
+            <!-- Form Masuk (Login) -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email Terdaftar</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="loginEmail" class="form-control" placeholder="nama@email.com" required>
+                        <i class="fas fa-envelope field-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.75rem;">
+                    <label>Kata Sandi</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required style="padding-right: 2.8rem;">
+                        <i class="fas fa-lock field-icon"></i>
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Masuk Sekarang
+                </button>
+            </form>
+
+            <!-- Form Daftar (Register) -->
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Nama Lengkap / Nama Usaha</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="regName" class="form-control" placeholder="Contoh: Budi Santoso" required>
+                        <i class="fas fa-user field-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp Aktif</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="regPhone" class="form-control" placeholder="Contoh: 085177137899" required style="padding-left: 2.8rem;">
+                        <i class="fas fa-phone field-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Aktif</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="regEmail" class="form-control" placeholder="nama@email.com" required>
+                        <i class="fas fa-envelope field-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.75rem;">
+                    <label>Kata Sandi</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="regPassword" class="form-control" placeholder="Minimal 6 karakter" required style="padding-right: 2.8rem;">
+                        <i class="fas fa-lock field-icon"></i>
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('regPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="regBtn">
+                    <i class="fas fa-user-plus"></i> Buat Akun Baru
+                </button>
+            </form>
+
+            <a href="https://event.sitenexs.com/event-sosmed" class="back-home">
+                <i class="fas fa-arrow-left"></i> Kembali ke Halaman Event
+            </a>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="sitenexs-toast" id="toast">
+        <div class="sitenexs-toast-icon"><i class="fas fa-check"></i></div>
+        <div class="sitenexs-toast-text">
+            <h4 id="toastTitle">Berhasil!</h4>
+            <p id="toastDesc">Aksi berhasil diproses.</p>
+        </div>
+    </div>
+
+    <!-- FIREBASE AUTH SCRIPT -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
+        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: 'AIzaSyDuN4zlRaSnmcUSuXE_E84IE7d3Mz8E-N4',
+            authDomain: 'sitenexs-62919.firebaseapp.com',
+            projectId: 'sitenexs-62919',
+            storageBucket: 'sitenexs-62919.firebasestorage.app',
+            messagingSenderId: '1060348110644',
+            appId: '1:1060348110644:web:e45af14d5f26a9cf8e6761',
+            measurementId: 'G-C7YL0Q7YRQ'
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.switchAuthTab = function(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const tabs = document.querySelectorAll('.auth-tab');
+
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (tab === 'login') {
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                tabs[0].classList.add('active');
+            } else {
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        // Fungsi Lihat / Sembunyikan Kata Sandi
+        window.togglePasswordVisibility = function(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        window.handleLogin = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const btn = document.getElementById('loginBtn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses masuk...';
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                localStorage.setItem('sitenexs_logged_in', 'true');
+                localStorage.setItem('sitenexs_uid', user.uid);
+
+                showToast('Berhasil Masuk', 'Selamat datang kembali di Sitenexs!');
+                setTimeout(() => {
+                    window.location.href = 'https://event.sitenexs.com/event-sosmed';
+                }, 1200);
+            } catch (error) {
+                console.error("Gagal masuk:", error);
+                let errMsg = 'Gagal masuk. Periksa kembali email dan kata sandi Anda.';
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') errMsg = 'Email atau kata sandi salah.';
+                else if (error.code === 'auth/wrong-password') errMsg = 'Kata sandi salah.';
+                
+                showToast('Gagal Masuk', errMsg, 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk Sekarang';
+            }
+        }
+
+        window.handleRegister = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const btn = document.getElementById('regBtn');
+
+            if (password.length < 6) {
+                showToast('Perhatian', 'Kata sandi minimal harus 6 karakter.', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Membuat akun...';
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    namaLengkap: name,
+                    nomorWhatsApp: phone,
+                    email: email,
+                    paketLangganan: 'Basic',
+                    createdAt: new Date().toISOString()
+                });
+
+                localStorage.setItem('sitenexs_logged_in', 'true');
+                localStorage.setItem('sitenexs_uid', user.uid);
+
+                showToast('Pendaftaran Berhasil', 'Akun Anda telah dibuat. Mengalihkan...');
+                setTimeout(() => {
+                    window.location.href = 'https://event.sitenexs.com/event-sosmed';
+                }, 1200);
+            } catch (error) {
+                console.error("Gagal daftar:", error);
+                let errMsg = 'Gagal mendaftarkan akun.';
+                if (error.code === 'auth/email-already-in-use') errMsg = 'Email sudah terdaftar di sistem.';
+                
+                showToast('Gagal Daftar', errMsg, 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-user-plus"></i> Buat Akun Baru';
+            }
+        }
+
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastDesc').innerText = message;
+            
+            const iconBox = toast.querySelector('.sitenexs-toast-icon');
+            if(type === 'error') {
+                iconBox.style.background = 'rgba(239, 68, 68, 0.15)';
+                iconBox.style.color = '#ef4444';
+                iconBox.innerHTML = '<i class="fas fa-exclamation"></i>';
+            } else {
+                iconBox.style.background = 'rgba(16, 185, 129, 0.15)';
+                iconBox.style.color = '#10b981';
+                iconBox.innerHTML = '<i class="fas fa-check"></i>';
+            }
+
+            toast.classList.add('short'); // Trigger class if needed or use sitenexs-toast class
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+    </script>
+</body>
+</html>
