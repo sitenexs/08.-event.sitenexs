@@ -77,27 +77,14 @@
 
         /* TOAST NOTIFIKASI */
         .sitenexs-toast {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: #ffffff;
-            color: var(--text-main);
-            padding: 1rem 1.25rem;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-            border: 1px solid var(--border-subtle);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transform: translateY(-20px);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed; top: 100px; right: 20px; background: #ffffff; color: var(--text-main);
+            padding: 1rem 1.25rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+            border: 1px solid var(--border-subtle); z-index: 99999; display: flex; align-items: center; gap: 0.75rem;
+            transform: translateY(-20px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .sitenexs-toast.show { transform: translateY(0); opacity: 1; }
         .sitenexs-toast-icon {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(16, 185, 129, 0.15); color: #10b981;
+            width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981;
             display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
         }
         .sitenexs-toast-text h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.1rem; }
@@ -117,6 +104,29 @@
         .nav-links { display: flex; align-items: center; gap: 1.2rem; font-size: 0.9rem; font-weight: 600; }
         .nav-links a { color: var(--text-muted); transition: var(--transition); }
         .nav-links a:hover { color: var(--primary); }
+
+        /* USER PROFILE BADGE IN NAVBAR */
+        .user-profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.85rem 0.3rem 0.35rem;
+            background: #ffffff;
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .user-initial-avatar {
+            width: 30px; height: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.82rem; font-weight: 800;
+            flex-shrink: 0;
+        }
 
         /* WALLET & EVENT CONTAINER */
         .event-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
@@ -150,42 +160,21 @@
         .task-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
         
         .task-img-container {
-            width: 100%;
-            height: 180px;
-            background: var(--bg-alt);
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; height: 180px; background: var(--bg-alt);
+            overflow: hidden; border-bottom: 1px solid var(--border-subtle);
+            display: flex; align-items: center; justify-content: center;
         }
-        .task-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .task-card:hover .task-img-container img {
-            transform: scale(1.03);
-        }
+        .task-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .task-card:hover .task-img-container img { transform: scale(1.03); }
 
         .task-body { padding: 1.5rem; }
         .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; gap: 1rem; }
         .task-title { font-size: 1.05rem; font-weight: 800; color: var(--text-main); flex: 1; }
         
         .task-reward { 
-            display: inline-flex; 
-            align-items: center; 
-            background: #ecfdf5; 
-            color: #047857; 
-            padding: 0.35rem 0.9rem; 
-            border-radius: var(--radius-full); 
-            font-size: 0.88rem; 
-            font-weight: 800; 
-            border: 1px solid #a7f3d0; 
-            white-space: nowrap; 
-            box-shadow: 0 2px 5px rgba(16, 185, 129, 0.08); 
-            letter-spacing: -0.01em;
+            display: inline-flex; align-items: center; background: #ecfdf5; color: #047857; 
+            padding: 0.35rem 0.9rem; border-radius: var(--radius-full); font-size: 0.88rem; font-weight: 800; 
+            border: 1px solid #a7f3d0; white-space: nowrap; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.08); 
         }
 
         .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.6; }
@@ -194,46 +183,22 @@
 
         /* RIWAYAT ITEM STYLE */
         .history-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
+            background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm);
         }
         .history-info h4 { font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem; }
         .history-info p { font-size: 0.85rem; color: var(--text-muted); }
-        .history-status {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.35rem;
-        }
-        .status-badge {
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 0.25rem 0.7rem;
-            border-radius: var(--radius-full);
-            text-transform: uppercase;
-        }
+        .history-status { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+        .status-badge { font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.7rem; border-radius: var(--radius-full); text-transform: uppercase; }
         .status-badge.pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .status-badge.approved { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
         .status-badge.rejected { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-        
-        .history-reward-add {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: #059669;
-        }
+        .history-reward-add { font-size: 0.95rem; font-weight: 800; color: #059669; }
 
         /* MODAL */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px);
             justify-content: center; align-items: center; padding: 1.5rem; z-index: 9999;
         }
         .modal-content {
@@ -252,7 +217,6 @@
         .form-control { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-medium); border-radius: var(--radius-md); font-size: 0.95rem; background-color: var(--bg-body); color: var(--text-main); transition: var(--transition); }
         .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); background-color: #ffffff; }
 
-        /* FOOTER */
         .footer-simple { text-align: center; padding: 3rem 0; font-size: 0.88rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); margin-top: 4rem; }
 
         @media (max-width: 768px) {
@@ -285,6 +249,13 @@
                     Admin Panel <i class="fas fa-tools" style="font-size: 0.75rem;"></i>
                 </a>
             </nav>
+
+            <!-- Bagian Tombol Masuk / Inisial Akun -->
+            <div id="authNavContainer">
+                <a href="sign-in.html" class="btn btn-primary btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </a>
+            </div>
         </div>
     </header>
 
@@ -306,7 +277,7 @@
                 <!-- Navigasi Tab -->
                 <div class="tabs">
                     <button class="tab-btn active" onclick="switchTab('tasks')"><i class="fas fa-tasks"></i> Misi Tersedia</button>
-                    <button class="tab-btn" onclick="switchTab('history')" onclick="loadHistory()"><i class="fas fa-history"></i> Riwayat</button>
+                    <button class="tab-btn" onclick="switchTab('history')"><i class="fas fa-history"></i> Riwayat</button>
                 </div>
 
                 <!-- Bagian Misi Tersedia -->
@@ -317,7 +288,7 @@
                     </div>
                 </div>
 
-                <!-- Bagian Riwayat (Terkini dengan Indikator Saldo +) -->
+                <!-- Bagian Riwayat -->
                 <div id="historySection" class="section-content">
                     <div id="historyListContainer">
                         <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
@@ -396,7 +367,8 @@
     <!-- FIREBASE INTEGRATION SCRIPT -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
-        import { getFirestore, collection, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
+        import { getFirestore, collection, getDocs, addDoc, doc, getDoc } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: 'AIzaSyDuN4zlRaSnmcUSuXE_E84IE7d3Mz8E-N4',
@@ -410,17 +382,54 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
 
-        let deviceId = localStorage.getItem('sitenexs_device_id');
-        if (!deviceId) {
-            deviceId = 'device_' + Math.random().toString(36.25, 9);
-            localStorage.setItem('sitenexs_device_id', deviceId);
-        }
-
+        let currentUserUid = localStorage.getItem('sitenexs_uid');
         let currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
         document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
 
         let selectedMission = null;
+
+        // Cek Status Login Firebase secara Real-time
+        onAuthStateChanged(auth, async (user) => {
+            const authContainer = document.getElementById('authNavContainer');
+            if (user) {
+                currentUserUid = user.uid;
+                localStorage.setItem('sitenexs_logged_in', 'true');
+                localStorage.setItem('sitenexs_uid', user.uid);
+
+                // Ambil data nama lengkap dari Firestore
+                let displayName = user.displayName || 'Akun Sitenexs';
+                try {
+                    const userSnap = await getDoc(doc(db, "users", user.uid));
+                    if (userSnap.exists() && userSnap.data().namaLengkap) {
+                        displayName = userSnap.data().namaLengkap;
+                    }
+                } catch (e) {}
+
+                const initial = displayName.charAt(0).toUpperCase();
+
+                // Ubah tombol masuk menjadi logo inisial profil
+                authContainer.innerHTML = `
+                    <div class="user-profile-badge" title="${displayName}">
+                        <div class="user-initial-avatar">${initial}</div>
+                        <span style="max-width: 90px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${displayName.split(' ')[0]}</span>
+                    </div>
+                `;
+            } else {
+                // Jika belum masuk, tampilkan tombol Masuk
+                if (currentUserUid) {
+                    // Jika sebelumnya tercatat login di localStorage tapi sesi auth habis
+                    // Tetap dukung atau reset
+                }
+                authContainer.innerHTML = `
+                    <a href="sign-in.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </a>
+                `;
+            }
+            fetchMissions();
+        });
 
         // Fetch Misi Tersedia
         async function fetchMissions() {
@@ -438,7 +447,7 @@
                 const subSnap = await getDocs(collection(db, "submissions"));
                 subSnap.forEach(sDoc => {
                     const sData = sDoc.data();
-                    if (sData.deviceId === deviceId && (sData.status === 'approved' || sData.status === 'pending')) {
+                    if ((sData.uid === currentUserUid || sData.deviceId === currentUserUid) && (sData.status === 'approved' || sData.status === 'pending')) {
                         submittedMissionIds.push(sData.missionId);
                     }
                 });
@@ -510,7 +519,7 @@
 
                 subSnap.forEach(sDoc => {
                     const s = sDoc.data();
-                    if (s.deviceId === deviceId) {
+                    if (s.uid === currentUserUid || s.deviceId === currentUserUid) {
                         count++;
                         let badgeClass = 'pending';
                         let statusText = 'Menunggu Verifikasi';
@@ -581,7 +590,8 @@
                     missionId: selectedMission.missionId,
                     missionTitle: selectedMission.title,
                     reward: selectedMission.reward,
-                    deviceId: deviceId,
+                    uid: currentUserUid || 'guest',
+                    deviceId: currentUserUid || 'guest',
                     username: taskInput,
                     proof: proofLink || '-',
                     status: 'pending',
@@ -645,7 +655,6 @@
                 tasksSec.classList.remove('active');
                 loadHistory();
                 
-                // Update saldo secara real-time jika baru saja disetujui di admin
                 currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
                 document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
             }
@@ -658,8 +667,6 @@
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3500);
         }
-
-        fetchMissions();
     </script>
 </body>
 </html>
