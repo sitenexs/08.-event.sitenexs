@@ -107,26 +107,28 @@
 
         /* USER PROFILE BADGE IN NAVBAR */
         .user-profile-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.3rem 0.85rem 0.3rem 0.35rem;
-            background: #ffffff;
-            border: 1px solid var(--border-medium);
-            border-radius: var(--radius-full);
-            box-shadow: var(--shadow-sm);
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text-main);
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.3rem 0.85rem 0.3rem 0.35rem; background: #ffffff;
+            border: 1px solid var(--border-medium); border-radius: var(--radius-full);
+            box-shadow: var(--shadow-sm); font-size: 0.88rem; font-weight: 700; color: var(--text-main);
         }
         .user-initial-avatar {
-            width: 30px; height: 30px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.82rem; font-weight: 800;
-            flex-shrink: 0;
+            width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.82rem; font-weight: 800; flex-shrink: 0;
         }
+
+        /* PLATFORM BADGE DI EVENT */
+        .platform-badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.2rem 0.6rem; border-radius: var(--radius-full);
+            font-size: 0.72rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .platform-badge.instagram { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
+        .platform-badge.whatsapp { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+        .platform-badge.tiktok { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
+        .platform-badge.facebook { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .platform-badge.lainnya { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
 
         /* WALLET & EVENT CONTAINER */
         .event-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
@@ -177,7 +179,17 @@
             border: 1px solid #a7f3d0; white-space: nowrap; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.08); 
         }
 
-        .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.6; }
+        .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
+        
+        /* POST TEXT BOX */
+        .post-text-box {
+            background: var(--bg-body); border: 1px dashed var(--border-medium);
+            border-radius: var(--radius-md); padding: 0.85rem 1rem; font-size: 0.88rem;
+            color: var(--text-main); margin-bottom: 1.25rem; position: relative;
+        }
+        .post-text-box p { margin-bottom: 0.3rem; font-weight: 700; font-size: 0.8rem; color: var(--text-muted); }
+        .post-text-box textarea { width: 100%; background: transparent; border: none; font-size: 0.88rem; color: var(--text-main); resize: none; font-family: inherit; }
+
         .task-action { display: flex; gap: 0.75rem; flex-wrap: wrap; }
         .task-action .btn { flex: 1; min-width: 130px; }
 
@@ -390,7 +402,6 @@
 
         let selectedMission = null;
 
-        // Cek Status Login Firebase secara Real-time
         onAuthStateChanged(auth, async (user) => {
             const authContainer = document.getElementById('authNavContainer');
             if (user) {
@@ -398,7 +409,6 @@
                 localStorage.setItem('sitenexs_logged_in', 'true');
                 localStorage.setItem('sitenexs_uid', user.uid);
 
-                // Ambil data nama lengkap dari Firestore
                 let displayName = user.displayName || 'Akun Sitenexs';
                 try {
                     const userSnap = await getDoc(doc(db, "users", user.uid));
@@ -409,7 +419,6 @@
 
                 const initial = displayName.charAt(0).toUpperCase();
 
-                // Ubah tombol masuk menjadi logo inisial profil
                 authContainer.innerHTML = `
                     <div class="user-profile-badge" title="${displayName}">
                         <div class="user-initial-avatar">${initial}</div>
@@ -417,11 +426,6 @@
                     </div>
                 `;
             } else {
-                // Jika belum masuk, tampilkan tombol Masuk
-                if (currentUserUid) {
-                    // Jika sebelumnya tercatat login di localStorage tapi sesi auth habis
-                    // Tetap dukung atau reset
-                }
                 authContainer.innerHTML = `
                     <a href="sign-in.html" class="btn btn-primary btn-sm">
                         <i class="fas fa-sign-in-alt"></i> Masuk
@@ -463,6 +467,13 @@
                     countActive++;
                     const rewardFormatted = Number(m.reward || 0).toLocaleString('id-ID');
                     
+                    const platform = m.platform || 'lainnya';
+                    let iconClass = 'fa-globe';
+                    if (platform === 'instagram') iconClass = 'fab fa-instagram';
+                    else if (platform === 'whatsapp') iconClass = 'fab fa-whatsapp';
+                    else if (platform === 'tiktok') iconClass = 'fab fa-tiktok';
+                    else if (platform === 'facebook') iconClass = 'fab fa-facebook';
+
                     let imgHtml = '';
                     if (m.imageUrl) {
                         imgHtml = `
@@ -472,10 +483,25 @@
                         `;
                     }
 
+                    let postTextBox = '';
+                    if (m.postText) {
+                        const safeText = m.postText.replace(/"/g, '&quot;');
+                        postTextBox = `
+                            <div class="post-text-box">
+                                <p><i class="fas fa-quote-left"></i> Teks Postingan / Caption:</p>
+                                <textarea rows="2" readonly id="text_${missionId}">${m.postText}</textarea>
+                                <button class="btn btn-secondary btn-sm" style="margin-top: 0.5rem; width: 100%; font-size: 0.78rem;" onclick="copyPostText('text_${missionId}')">
+                                    <i class="fas fa-copy"></i> Salin Teks Postingan
+                                </button>
+                            </div>
+                        `;
+                    }
+
                     html += `
                         <div class="task-card">
                             ${imgHtml}
                             <div class="task-body">
+                                <span class="platform-badge ${platform}"><i class="${iconClass}"></i> ${platform}</span>
                                 <div class="task-header">
                                     <div class="task-title">${m.title}</div>
                                     <div class="task-reward">+Rp ${rewardFormatted}</div>
@@ -483,6 +509,7 @@
                                 <div class="task-desc">
                                     ${m.desc}
                                 </div>
+                                ${postTextBox}
                                 <div class="task-action">
                                     <a href="${m.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                                         <i class="fas fa-external-link-alt text-primary"></i> Buka Tautan
@@ -505,6 +532,15 @@
                 console.error("Gagal memuat misi:", error);
                 tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: #ef4444; padding: 3rem 1.5rem;">Gagal memuat daftar misi dari database.</div>';
             }
+        }
+
+        // Fungsi Salin Teks Postingan
+        window.copyPostText = function(elementId) {
+            const textarea = document.getElementById(elementId);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textarea.value);
+            showToast('Berhasil Disalin!', 'Teks postingan berhasil disalin ke clipboard.');
         }
 
         // Fetch Riwayat Tugas Pengguna
