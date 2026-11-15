@@ -244,9 +244,9 @@
                         <form id="missionForm" onsubmit="saveMissionWithCompressedImage(event)">
                             <div class="form-group">
                                 <label>Kategori Platform Sosmed</label>
-                                <select id="missionPlatform" class="form-control" required>
+                                <select id="missionPlatform" class="form-control" onchange="handlePlatformChange()" required>
                                     <option value="instagram">Instagram</option>
-                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="whatsapp">WhatsApp (Sebarkan ke Grup)</option>
                                     <option value="tiktok">TikTok</option>
                                     <option value="facebook">Facebook</option>
                                     <option value="lainnya">Lainnya</option>
@@ -254,19 +254,23 @@
                             </div>
                             <div class="form-group">
                                 <label>Judul Misi</label>
-                                <input type="text" id="missionTitle" class="form-control" placeholder="Contoh: Follow Instagram Resmi" required>
+                                <input type="text" id="missionTitle" class="form-control" placeholder="Contoh: Sebarkan Info ke Grup WA" required>
                             </div>
                             <div class="form-group">
                                 <label>Reward (Rp)</label>
                                 <input type="number" id="missionReward" class="form-control" placeholder="5000" required>
                             </div>
                             <div class="form-group">
-                                <label>Deskripsi Instruksi</label>
+                                <label id="descLabel">Deskripsi Instruksi</label>
                                 <textarea id="missionDesc" class="form-control" rows="3" placeholder="Tuliskan petunjuk singkat..." required></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Link Tautan Aksi (URL)</label>
-                                <input type="text" id="missionUrl" class="form-control" placeholder="https://..." required>
+                                <label id="urlLabel">Link Tautan Aksi (URL)</label>
+                                <input type="text" id="missionUrl" class="form-control" placeholder="https://chat.whatsapp.com/..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Isi Postingan / Teks Caption (Opsional)</label>
+                                <textarea id="missionPostText" class="form-control" rows="3" placeholder="Tuliskan teks atau caption yang harus dibagikan pengguna ke sosmed..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Foto Banner Misi (Opsional)</label>
@@ -342,6 +346,28 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        window.handlePlatformChange = function() {
+            const platform = document.getElementById('missionPlatform').value;
+            const descLabel = document.getElementById('descLabel');
+            const urlLabel = document.getElementById('urlLabel');
+            const descInput = document.getElementById('missionDesc');
+            const urlInput = document.getElementById('missionUrl');
+            const titleInput = document.getElementById('missionTitle');
+
+            if (platform === 'whatsapp') {
+                descLabel.innerText = 'Instruksi (Sebarkan ke Grup WhatsApp)';
+                urlLabel.innerText = 'Link Undangan Grup WhatsApp (URL)';
+                descInput.placeholder = 'Bagikan poster/info Sitenexs ke minimal 2 Grup WhatsApp UMKM.';
+                urlInput.placeholder = 'https://chat.whatsapp.com/...';
+                titleInput.placeholder = 'Contoh: Sebarkan Info Sitenexs ke Grup WA';
+            } else {
+                descLabel.innerText = 'Deskripsi Instruksi';
+                urlLabel.innerText = 'Link Tautan Aksi (URL)';
+                descInput.placeholder = 'Tuliskan petunjuk singkat...';
+                urlInput.placeholder = 'https://...';
+            }
+        }
+
         async function loadAdminData() {
             loadAdminMissions();
             loadSubmissions();
@@ -365,6 +391,9 @@
                     else if (platform === 'tiktok') iconClass = 'fab fa-tiktok';
                     else if (platform === 'facebook') iconClass = 'fab fa-facebook';
 
+                    let linkHtml = m.url ? `<p><b>Link Tujuan:</b> <a href="${m.url}" target="_blank" style="color: var(--primary); text-decoration: underline;">${m.url}</a></p>` : '';
+                    let postTextHtml = m.postText ? `<p><b>Teks Postingan:</b> <span style="background: var(--bg-body); padding: 0.2rem 0.4rem; border-radius: 4px; display: inline-block;">${m.postText}</span></p>` : '';
+
                     html += `
                         <div class="admin-item-card">
                             <div class="item-row">
@@ -374,6 +403,8 @@
                                     </div>
                                     <h4>${m.title}</h4>
                                     <p>${m.desc}</p>
+                                    ${linkHtml}
+                                    ${postTextHtml}
                                 </div>
                                 <div class="badge-pill">+Rp ${Number(m.reward).toLocaleString('id-ID')}</div>
                             </div>
@@ -488,6 +519,7 @@
             const reward = Number(document.getElementById('missionReward').value);
             const desc = document.getElementById('missionDesc').value.trim();
             const url = document.getElementById('missionUrl').value.trim();
+            const postText = document.getElementById('missionPostText').value.trim();
             const fileInput = document.getElementById('missionImageFile');
             const saveBtn = document.getElementById('saveBtn');
 
@@ -506,6 +538,7 @@
                     reward,
                     desc,
                     url,
+                    postText,
                     imageUrl
                 });
 
@@ -530,16 +563,6 @@
         }
 
         loadAdminData();
-    </script>
-
-    <script>
-        function showToast(title, message, type = 'success') {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastDesc').innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3500);
-        }
     </script>
 </body>
 </html>
