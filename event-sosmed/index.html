@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitenexs — Event</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Sitenexs Event. Mitra transformasi digital UMKM Indonesia.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sitenexs.com/event">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://sitenexs.com/assets/logo/logo.png" id="faviconImg">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-alt: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-subtle: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --border-accent: #93c5fd;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.1);
+            --shadow-card: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.625rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 15px; width: 100%; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        button, input, select, textarea { font-family: inherit; outline: none; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .bg-gradient-soft { background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); }
+
+        .page-section { position: relative; width: 100%; padding: 5.5rem 0; display: flex; align-items: center; justify-content: center; scroll-margin-top: 90px; }
+
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-full); transition: var(--transition); cursor: pointer; border: 1px solid transparent; text-align: center; line-height: 1.2; }
+        .btn-sm { padding: 0.45rem 1.1rem; font-size: 0.85rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35); }
+        .btn-secondary { background-color: #ffffff; color: var(--text-main); border: 1px solid var(--border-medium); box-shadow: var(--shadow-sm); }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .btn-outline-primary { background-color: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+        .btn-outline-primary:hover { background-color: var(--primary-light); transform: translateY(-3px); }
+        .btn-block { width: 100%; border-radius: var(--radius-md); }
+
+        /* TOAST NOTIFIKASI */
+        .sitenexs-toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+            border: 1px solid var(--border-subtle);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sitenexs-toast.show { transform: translateY(0); opacity: 1; }
+        .sitenexs-toast-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(16, 185, 129, 0.15); color: #10b981;
+            display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+        }
+        .sitenexs-toast-text h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.1rem; }
+        .sitenexs-toast-text p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* NAVBAR STYLING */
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);
+        }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+        .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.25rem; color: var(--text-main); flex-shrink: 0; }
+        .logo-text { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; }
+        .logo-img { height: 38px; width: 38px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
+        .nav-links { display: flex; align-items: center; gap: 1.2rem; font-size: 0.9rem; font-weight: 600; }
+        .nav-links a { color: var(--text-muted); transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* WALLET & EVENT CONTAINER */
+        .event-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        .wallet-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
+            padding: 2rem; box-shadow: var(--shadow-card);
+            display: flex; justify-content: space-between; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .wallet-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); }
+        .wallet-info h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; }
+        .wallet-info .balance { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-top: 0.25rem; letter-spacing: -0.02em; }
+
+        /* TABS */
+        .tabs { display: flex; background: var(--bg-card); border-radius: var(--radius-lg); padding: 5px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
+        .tab-btn { flex: 1; background: none; border: none; padding: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: var(--radius-md); transition: var(--transition); font-size: 0.9rem; }
+        .tab-btn.active { background-color: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* TASK CARD WITH IMAGE */
+        .task-card {
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.25rem;
+            box-shadow: var(--shadow-sm); transition: var(--transition);
+        }
+        .task-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        
+        .task-img-container {
+            width: 100%;
+            height: 180px;
+            background: var(--bg-alt);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .task-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .task-card:hover .task-img-container img {
+            transform: scale(1.03);
+        }
+
+        .task-body { padding: 1.5rem; }
+        .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; gap: 1rem; }
+        .task-title { font-size: 1.05rem; font-weight: 800; color: var(--text-main); flex: 1; }
+        
+        .task-reward { 
+            display: inline-flex; 
+            align-items: center; 
+            background: #ecfdf5; 
+            color: #047857; 
+            padding: 0.35rem 0.9rem; 
+            border-radius: var(--radius-full); 
+            font-size: 0.88rem; 
+            font-weight: 800; 
+            border: 1px solid #a7f3d0; 
+            white-space: nowrap; 
+            box-shadow: 0 2px 5px rgba(16, 185, 129, 0.08); 
+            letter-spacing: -0.01em;
+        }
+
+        .task-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.6; }
+        .task-action { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .task-action .btn { flex: 1; min-width: 130px; }
+
+        /* RIWAYAT ITEM STYLE */
+        .history-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .history-info h4 { font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem; }
+        .history-info p { font-size: 0.85rem; color: var(--text-muted); }
+        .history-status {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.35rem;
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+        }
+        .status-badge.pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .status-badge.approved { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .status-badge.rejected { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .history-reward-add {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #059669;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            justify-content: center; align-items: center; padding: 1.5rem; z-index: 9999;
+        }
+        .modal-content {
+            background: var(--bg-card); width: 100%; max-width: 460px; padding: 2rem;
+            border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-subtle);
+            animation: scaleUp 0.3s ease;
+        }
+        @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+        .modal-header h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
+        .close-btn { background: rgba(0,0,0,0.05); border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .close-btn:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-group label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
+        .form-control { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-medium); border-radius: var(--radius-md); font-size: 0.95rem; background-color: var(--bg-body); color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); background-color: #ffffff; }
+
+        /* FOOTER */
+        .footer-simple { text-align: center; padding: 3rem 0; font-size: 0.88rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); margin-top: 4rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .wallet-card { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
+            .wallet-card .btn-primary { width: 100%; }
+            .task-action { flex-direction: column; }
+            .task-action .btn { width: 100%; }
+            .history-item { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .history-status { align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="https://sitenexs.com" class="logo">
+                <img src="https://sitenexs.com/assets/logo/logo.png" alt="Sitenexs Logo" class="logo-img" id="navLogoImg" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Sitenexs&background=2563eb&color=fff&size=64&rounded=true';">
+                <span class="logo-text">SiteNexs</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="https://sitenexs.com/#demo-produk">Demo</a>
+                <a href="https://sitenexs.com/#solusi-digital">Solusi</a>
+                <a href="https://sitenexs.com/#harga">Harga</a>
+                <a href="https://sitenexs.com/#tentang">Tentang Kami</a>
+                <a href="admin.html" style="color: var(--primary); font-weight: 700;">
+                    Admin Panel <i class="fas fa-tools" style="font-size: 0.75rem;"></i>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN EVENT SECTION -->
+    <section class="page-section bg-gradient-soft bg-grid-pattern" style="padding-top: 120px; padding-bottom: 3rem;">
+        <div class="container">
+            <div class="event-container">
+                <!-- Informasi Saldo -->
+                <div class="wallet-card">
+                    <div class="wallet-info">
+                        <h3>Saldo Reward Anda</h3>
+                        <div class="balance" id="userBalance">Rp 0</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="showWithdrawModal()">
+                        <i class="fas fa-wallet"></i> Tarik Saldo
+                    </button>
+                </div>
+
+                <!-- Navigasi Tab -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('tasks')"><i class="fas fa-tasks"></i> Misi Tersedia</button>
+                    <button class="tab-btn" onclick="switchTab('history')" onclick="loadHistory()"><i class="fas fa-history"></i> Riwayat</button>
+                </div>
+
+                <!-- Bagian Misi Tersedia -->
+                <div id="tasksSection" class="section-content active">
+                    <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 0.75rem; display: block;"></i>
+                        Memuat daftar misi dari database...
+                    </div>
+                </div>
+
+                <!-- Bagian Riwayat (Terkini dengan Indikator Saldo +) -->
+                <div id="historySection" class="section-content">
+                    <div id="historyListContainer">
+                        <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 0.75rem; display: block;"></i>
+                            Memuat riwayat tugas...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="container">
+        <div class="footer-simple">
+            &copy; 2026 Sitenexs. Solusi Digital UMKM Indonesia. All rights reserved.
+        </div>
+    </div>
+
+    <!-- Modal Submit Bukti Tugas -->
+    <div class="modal" id="submitModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTaskTitle">Kumpul Bukti Tugas</h3>
+                <button class="close-btn" onclick="closeSubmitModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label>Akun / Username Anda</label>
+                <input type="text" id="taskInput" class="form-control" placeholder="Masukkan username atau akun Anda">
+            </div>
+            <div class="form-group">
+                <label>Link Postingan / Keterangan Bukti</label>
+                <input type="text" id="proofLink" class="form-control" placeholder="Contoh link atau catatan verifikasi">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="submitTask()">
+                <i class="fas fa-check-circle"></i> Kirim Bukti ke Admin
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Tarik Saldo -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tarik Saldo Reward</h3>
+                <button class="close-btn" onclick="closeWithdrawModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label>Metode Penarikan</label>
+                <select class="form-control" id="withdrawMethod">
+                    <option value="DANA">DANA E-Wallet</option>
+                    <option value="OVO">OVO / GoPay</option>
+                    <option value="BCA">Bank BCA</option>
+                    <option value="BRI">Bank BRI</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nomor Akun / Rekening Tujuan</label>
+                <input type="text" id="accountNumber" class="form-control" placeholder="Contoh: 085177137899">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="processWithdraw()">
+                <i class="fas fa-paper-plane"></i> Ajukan Penarikan Saldo
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="sitenexs-toast" id="toast">
+        <div class="sitenexs-toast-icon"><i class="fas fa-check"></i></div>
+        <div class="sitenexs-toast-text">
+            <h4 id="toastTitle">Berhasil!</h4>
+            <p id="toastDesc">Aksi berhasil diproses.</p>
+        </div>
+    </div>
+
+    <!-- FIREBASE INTEGRATION SCRIPT -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: 'AIzaSyDuN4zlRaSnmcUSuXE_E84IE7d3Mz8E-N4',
+            authDomain: 'sitenexs-62919.firebaseapp.com',
+            projectId: 'sitenexs-62919',
+            storageBucket: 'sitenexs-62919.firebasestorage.app',
+            messagingSenderId: '1060348110644',
+            appId: '1:1060348110644:web:e45af14d5f26a9cf8e6761',
+            measurementId: 'G-C7YL0Q7YRQ'
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let deviceId = localStorage.getItem('sitenexs_device_id');
+        if (!deviceId) {
+            deviceId = 'device_' + Math.random().toString(36.25, 9);
+            localStorage.setItem('sitenexs_device_id', deviceId);
+        }
+
+        let currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
+        document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
+
+        let selectedMission = null;
+
+        // Fetch Misi Tersedia
+        async function fetchMissions() {
+            const tasksSection = document.getElementById('tasksSection');
+            if (!tasksSection) return;
+
+            try {
+                const missionsSnap = await getDocs(collection(db, "missions"));
+                if (missionsSnap.empty) {
+                    tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Belum ada misi tersedia saat ini.</div>';
+                    return;
+                }
+
+                let submittedMissionIds = [];
+                const subSnap = await getDocs(collection(db, "submissions"));
+                subSnap.forEach(sDoc => {
+                    const sData = sDoc.data();
+                    if (sData.deviceId === deviceId && (sData.status === 'approved' || sData.status === 'pending')) {
+                        submittedMissionIds.push(sData.missionId);
+                    }
+                });
+
+                let html = '';
+                let countActive = 0;
+
+                missionsSnap.forEach((docSnap) => {
+                    const missionId = docSnap.id;
+                    if (submittedMissionIds.includes(missionId)) return;
+
+                    const m = docSnap.data();
+                    countActive++;
+                    const rewardFormatted = Number(m.reward || 0).toLocaleString('id-ID');
+                    
+                    let imgHtml = '';
+                    if (m.imageUrl) {
+                        imgHtml = `
+                            <div class="task-img-container">
+                                <img src="${m.imageUrl}" alt="${m.title}" onerror="this.parentElement.style.display='none';">
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <div class="task-card">
+                            ${imgHtml}
+                            <div class="task-body">
+                                <div class="task-header">
+                                    <div class="task-title">${m.title}</div>
+                                    <div class="task-reward">+Rp ${rewardFormatted}</div>
+                                </div>
+                                <div class="task-desc">
+                                    ${m.desc}
+                                </div>
+                                <div class="task-action">
+                                    <a href="${m.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                        <i class="fas fa-external-link-alt text-primary"></i> Buka Tautan
+                                    </a>
+                                    <button class="btn btn-primary" onclick="openSubmitModal('${missionId}', '${m.title.replace(/'/g, "\\'")}', ${m.reward})">
+                                        <i class="fas fa-paper-plane"></i> Kumpul Tugas
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (countActive === 0) {
+                    tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">Semua misi telah diselesaikan atau sedang dalam verifikasi!</div>';
+                } else {
+                    tasksSection.innerHTML = html;
+                }
+            } catch (error) {
+                console.error("Gagal memuat misi:", error);
+                tasksSection.innerHTML = '<div class="task-card" style="text-align: center; color: #ef4444; padding: 3rem 1.5rem;">Gagal memuat daftar misi dari database.</div>';
+            }
+        }
+
+        // Fetch Riwayat Tugas Pengguna
+        window.loadHistory = async function() {
+            const historyContainer = document.getElementById('historyListContainer');
+            if (!historyContainer) return;
+
+            try {
+                const subSnap = await getDocs(collection(db, "submissions"));
+                let html = '';
+                let count = 0;
+
+                subSnap.forEach(sDoc => {
+                    const s = sDoc.data();
+                    if (s.deviceId === deviceId) {
+                        count++;
+                        let badgeClass = 'pending';
+                        let statusText = 'Menunggu Verifikasi';
+                        if (s.status === 'approved') {
+                            badgeClass = 'approved';
+                            statusText = 'Disetujui (Selesai)';
+                        } else if (s.status === 'rejected') {
+                            badgeClass = 'rejected';
+                            statusText = 'Ditolak Admin';
+                        }
+
+                        const rewardAdd = s.status === 'approved' 
+                            ? `<div class="history-reward-add">+Rp ${Number(s.reward).toLocaleString('id-ID')}</div>` 
+                            : `<span style="font-size: 0.82rem; color: var(--text-muted);">Estimasi: Rp ${Number(s.reward).toLocaleString('id-ID')}</span>`;
+
+                        html += `
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <h4>${s.missionTitle}</h4>
+                                    <p><b>Akun:</b> ${s.username} | <b>Bukti:</b> ${s.proof}</p>
+                                </div>
+                                <div class="history-status">
+                                    <span class="status-badge ${badgeClass}">${statusText}</span>
+                                    ${rewardAdd}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                if (count === 0) {
+                    historyContainer.innerHTML = `
+                        <div class="task-card" style="text-align: center; color: var(--text-muted); padding: 3rem 1.5rem;">
+                            <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.5; display: block;"></i>
+                            Belum ada riwayat tugas yang dikirim.
+                        </div>
+                    `;
+                } else {
+                    historyContainer.innerHTML = html;
+                }
+            } catch (err) {
+                console.error(err);
+                historyContainer.innerHTML = '<p style="text-align: center; color: red;">Gagal memuat riwayat.</p>';
+            }
+        }
+
+        window.openSubmitModal = function(missionId, title, reward) {
+            selectedMission = { missionId, title, reward };
+            document.getElementById('modalTaskTitle').innerText = 'Misi: ' + title;
+            document.getElementById('submitModal').style.display = 'flex';
+        }
+
+        window.closeSubmitModal = function() {
+            document.getElementById('submitModal').style.display = 'none';
+        }
+
+        window.submitTask = async function() {
+            const taskInput = document.getElementById('taskInput').value.trim();
+            const proofLink = document.getElementById('proofLink').value.trim();
+
+            if (!taskInput) {
+                alert('Mohon masukkan akun atau username Anda!');
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "submissions"), {
+                    missionId: selectedMission.missionId,
+                    missionTitle: selectedMission.title,
+                    reward: selectedMission.reward,
+                    deviceId: deviceId,
+                    username: taskInput,
+                    proof: proofLink || '-',
+                    status: 'pending',
+                    createdAt: new Date().toISOString()
+                });
+
+                closeSubmitModal();
+                showToast('Tugas Terkirim!', 'Bukti tugas berhasil dikirim ke Admin untuk diverifikasi.');
+                document.getElementById('taskInput').value = '';
+                document.getElementById('proofLink').value = '';
+                fetchMissions();
+                loadHistory();
+            } catch (err) {
+                console.error("Gagal mengirim tugas:", err);
+                showToast('Gagal', 'Terjadi kesalahan saat mengirim bukti tugas.', 'error');
+            }
+        }
+
+        window.showWithdrawModal = function() {
+            if (currentBalance <= 0) {
+                showToast('Saldo Kosong', 'Saldo Anda masih Rp 0, selesaikan misi terlebih dahulu!', 'error');
+                return;
+            }
+            document.getElementById('withdrawModal').style.display = 'flex';
+        }
+
+        window.closeWithdrawModal = function() {
+            document.getElementById('withdrawModal').style.display = 'none';
+        }
+
+        window.processWithdraw = function() {
+            const accNum = document.getElementById('accountNumber').value.trim();
+            if (!accNum) {
+                showToast('Perhatian', 'Masukkan nomor rekening atau akun tujuan!', 'error');
+                return;
+            }
+
+            currentBalance = 0;
+            localStorage.setItem('sitenexs_balance', currentBalance);
+            document.getElementById('userBalance').innerText = 'Rp 0';
+            closeWithdrawModal();
+            showToast('Penarikan Diajukan', 'Permintaan penarikan saldo berhasil dikirim.');
+        }
+
+        window.switchTab = function(tabName) {
+            const taskBtn = document.querySelectorAll('.tab-btn')[0];
+            const historyBtn = document.querySelectorAll('.tab-btn')[1];
+            const tasksSec = document.getElementById('tasksSection');
+            const historySec = document.getElementById('historySection');
+
+            if (tabName === 'tasks') {
+                taskBtn.classList.add('active');
+                historyBtn.classList.remove('active');
+                tasksSec.classList.add('active');
+                historySec.classList.remove('active');
+                fetchMissions();
+            } else {
+                historyBtn.classList.add('active');
+                taskBtn.classList.remove('active');
+                historySec.classList.add('active');
+                tasksSec.classList.remove('active');
+                loadHistory();
+                
+                // Update saldo secara real-time jika baru saja disetujui di admin
+                currentBalance = Number(localStorage.getItem('sitenexs_balance')) || 0;
+                document.getElementById('userBalance').innerText = 'Rp ' + currentBalance.toLocaleString('id-ID');
+            }
+        }
+
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastDesc').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        fetchMissions();
+    </script>
+</body>
+</html>
