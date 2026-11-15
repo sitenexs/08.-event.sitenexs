@@ -291,6 +291,7 @@
             fetchMissions();
         });
 
+        // HANYA SEMBUNYIKAN MISI UNTUK AKUN YANG BERSANGKUTAN (BERDASARKAN uid)
         async function fetchMissions() {
             const tasksSection = document.getElementById('tasksSection');
             if (!tasksSection) return;
@@ -302,11 +303,12 @@
                     return;
                 }
 
+                // Ambil submission yang HANYA dimiliki oleh currentUserUid ini saja
                 let submittedMissionIds = [];
                 const subSnap = await getDocs(collection(db, "submissions"));
                 subSnap.forEach(sDoc => {
                     const sData = sDoc.data();
-                    if ((sData.uid === currentUserUid || sData.deviceId === currentUserUid) && (sData.status === 'approved' || sData.status === 'pending')) {
+                    if (sData.uid === currentUserUid && (sData.status === 'approved' || sData.status === 'pending')) {
                         submittedMissionIds.push(sData.missionId);
                     }
                 });
@@ -316,7 +318,7 @@
 
                 missionsSnap.forEach((docSnap) => {
                     const missionId = docSnap.id;
-                    if (submittedMissionIds.includes(missionId)) return;
+                    if (submittedMissionIds.includes(missionId)) return; // Lewati hanya untuk user ini
 
                     const m = docSnap.data();
                     countActive++;
@@ -376,7 +378,7 @@
 
                 subSnap.forEach(sDoc => {
                     const s = sDoc.data();
-                    if (s.uid === currentUserUid || s.deviceId === currentUserUid) {
+                    if (s.uid === currentUserUid) { // Tampilkan riwayat khusus akun yang sedang login
                         count++;
                         let badgeClass = s.status === 'approved' ? 'approved' : s.status === 'rejected' ? 'rejected' : 'pending';
                         let statusText = s.status === 'approved' ? 'Disetujui (Selesai)' : s.status === 'rejected' ? 'Ditolak Admin' : 'Menunggu Verifikasi';
@@ -405,6 +407,11 @@
         }
 
         window.openSubmitModal = function(missionId, title, reward) {
+            if (!currentUserUid) {
+                alert('Silakan Masuk terlebih dahulu untuk mengumpulkan tugas!');
+                window.location.href = 'sign-in.html';
+                return;
+            }
             selectedMission = { missionId, title, reward };
             document.getElementById('modalTaskTitle').innerText = 'Misi: ' + title;
             document.getElementById('submitModal').style.display = 'flex';
@@ -455,8 +462,7 @@
                     missionId: selectedMission.missionId,
                     missionTitle: selectedMission.title,
                     reward: selectedMission.reward,
-                    uid: currentUserUid || 'guest',
-                    deviceId: currentUserUid || 'guest',
+                    uid: currentUserUid, // Disimpan berbasis UID akun
                     username: taskInput,
                     proof: proofLink || '-',
                     proofImageUrl: proofImageUrl,
